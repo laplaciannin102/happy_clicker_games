@@ -1,0 +1,28 @@
+{
+  "name": "rumor-garden",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "simulate": "node scripts/run-simulation.mjs",
+    "simulate:phase4": "node scripts/run-simulation.mjs --phase4",
+    "simulate:phase5": "node scripts/run-simulation.mjs --phase5",
+    "simulate:phase6": "node scripts/run-simulation.mjs --phase6",
+    "simulate:phase8": "node scripts/run-phase8.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^6.4.5",
+    "vitest": "^4.1.12"
+  },
+  "dependencies": {
+    "break_eternity.js": "^2.1.3"
+  }
+}

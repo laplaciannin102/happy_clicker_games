@@ -1,0 +1,152 @@
+/* 夢（おやすみ・夢ツリー）と、自動化の ON/OFF。色は styles/theme.css のトークンを使う。 */
+.dream-hint {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.dream-progress {
+  height: 8px;
+  margin: 0 0 8px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  overflow: hidden;
+}
+
+.dream-progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+
+.dream-prestige {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.dream-prestige[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.dream-page h3 {
+  margin: 20px 0 8px;
+  font-size: 1rem;
+}
+
+.dream-tree {
+  display: grid;
+  gap: 12px;
+}
+
+.dream-center {
+  display: flex;
+  justify-content: center;
+}
+
+.dream-center .dream-node {
+  max-width: 320px;
+}
+
+.dream-branches {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .dream-branches {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dream-branch {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+}
+
+.dream-branch h4 {
+  margin: 0 0 2px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.dream-node {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  text-align: left;
+  cursor: pointer;
+}
+
+.dream-node.is-locked {
+  border-style: dashed;
+  opacity: 0.55;
+  cursor: default;
+}
+
+.dream-node.is-available {
+  opacity: 0.8;
+}
+
+.dream-node.is-affordable {
+  opacity: 1;
+  border-color: var(--ok);
+  background: var(--ok-soft);
+}
+
+.dream-node.is-owned {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  cursor: default;
+}
+
+.dream-node-icon {
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.dream-node-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dream-node-name {
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.dream-node-desc,
+.dream-node-cost {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.is-affordable .dream-node-cost {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+.auto-toggle {
+  padding: 2px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.auto-toggle[aria-pressed='true'] {
+  border-color: var(--ok);
+  color: var(--ok);
+  font-weight: 700;
+}

@@ -1,0 +1,51 @@
+/* パステルの夜空（DESIGN.md §14）。色はトークンで管理し、ダークモードで差し替える。
+   設定の「画面の色」：auto は OS に合わせる（data-theme なし）、light / dark は data-theme で固定。 */
+:root {
+  --bg: #f3f0fb;
+  --bg-deep: #e6e0f7;
+  --panel: #ffffff;
+  --line: #ddd6f0;
+  --fg: #2b2840;
+  --muted: #6f6a88;
+  --accent: #8b7bd8;
+  --accent-soft: #ece8ff;
+  --ok: #3f8f6b;
+  --ok-soft: #e3f4ec;
+  --warn: #b5603a;
+  --shadow: 0 2px 10px rgb(60 40 120 / 8%);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #17152b;
+    --bg-deep: #100e20;
+    --panel: #221f3b;
+    --line: #36315a;
+    --fg: #ece8ff;
+    --muted: #a59fc6;
+    --accent: #b3a6ff;
+    --accent-soft: #2e2852;
+    --ok: #7fd3ab;
+    --ok-soft: #1f3a33;
+    --warn: #f0a07c;
+    --shadow: 0 2px 12px rgb(0 0 0 / 35%);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #17152b;
+  --bg-deep: #100e20;
+  --panel: #221f3b;
+  --line: #36315a;
+  --fg: #ece8ff;
+  --muted: #a59fc6;
+  --accent: #b3a6ff;
+  --accent-soft: #2e2852;
+  --ok: #7fd3ab;
+  --ok-soft: #1f3a33;
+  --warn: #f0a07c;
+  --shadow: 0 2px 12px rgb(0 0 0 / 35%);
+  color-scheme: dark;
+}

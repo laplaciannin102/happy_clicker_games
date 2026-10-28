@@ -1,0 +1,216 @@
+/* 冬眠・ぬくもりショップと、季節のバッジ。色は styles/theme.css のトークンを使う。 */
+.season-badge {
+  padding: 2px 8px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: help;
+}
+
+.hibernation-summary {
+  margin: 0 0 8px;
+  font-weight: 700;
+}
+
+.season-card {
+  margin: 0 0 4px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+}
+
+.hibernation-next {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.hibernation-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.hibernation-button[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.hibernation-page h3 {
+  margin: 20px 0 8px;
+  font-size: 1rem;
+}
+
+.warmth-shop {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 8px;
+}
+
+.warmth-item {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  text-align: left;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.warmth-item.is-affordable {
+  opacity: 1;
+  border-color: var(--ok);
+  background: var(--ok-soft);
+}
+
+.warmth-item.is-owned {
+  opacity: 1;
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  cursor: default;
+}
+
+.warmth-icon {
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.warmth-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.warmth-name {
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.warmth-desc,
+.warmth-cost {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.is-affordable .warmth-cost {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+/* ---- チャレンジ「眠れない夜」 ---- */
+.challenge-summary {
+  margin: 0 0 8px;
+  font-weight: 700;
+}
+
+.challenge-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.challenge {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.challenge.is-done {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.challenge.is-active {
+  border-color: var(--warn);
+}
+
+.challenge-icon {
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.challenge-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.challenge-name {
+  font-weight: 700;
+}
+
+.challenge-detail {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.challenge-status {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.challenge-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.challenge [aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+@media (max-width: 480px) {
+  .challenge {
+    grid-template-columns: 28px 1fr;
+  }
+  .challenge > :last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+.challenge-line {
+  margin: 0 0 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--warn);
+}
+
+/* ---- オートおやすみ ---- */
+.auto-prestige {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 0.8rem;
+}
+
+.auto-prestige select {
+  padding: 2px 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.auto-prestige-help {
+  color: var(--muted);
+}

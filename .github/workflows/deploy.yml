@@ -1,0 +1,65 @@
+# main に push されたら、2つのゲームをそれぞれビルドし、
+# ルートの index.html と一緒に GitHub Pages へ公開する。
+# 公開URL上のパスはフォルダ名と同じ（/contagious_yawns/, /rumor_garden/）。
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  GAME_DIRS: "contagious_yawns rumor_garden"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # vite 7 と rumor_garden の engines（>=20.19）に合わせる
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            contagious_yawns/package-lock.json
+            rumor_garden/package-lock.json
+
+      - name: Build games and assemble site
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          cp index.html _site/
+          touch _site/.nojekyll
+          for dir in $GAME_DIRS; do
+            echo "::group::Build $dir"
+            (cd "$dir" && npm ci && npm run build)
+            cp -r "$dir/dist" "_site/$dir"
+            echo "::endgroup::"
+          done
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

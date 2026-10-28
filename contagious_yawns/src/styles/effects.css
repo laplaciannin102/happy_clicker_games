@@ -1,0 +1,173 @@
+/* 演出（Phase 7）と、画像・スマホまわりの調整。色は styles/theme.css のトークンを使う。 */
+
+/* ---- 画像（docs/ASSETS.md）。置かれていなければ絵文字のまま ---- */
+.icon-image {
+  display: block;
+  width: 1em;
+  height: 1em;
+  margin: 0 auto;
+  object-fit: contain;
+  user-select: none;
+}
+
+/* ---- 桁が増えた ---- */
+.digit-up {
+  position: absolute;
+  left: 50%;
+  top: -6px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  animation: digit-up 1.4s ease-out forwards;
+}
+
+@keyframes digit-up {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px) scale(0.8);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1.05);
+  }
+  75% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -16px);
+  }
+}
+
+.sparkle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: var(--accent);
+  font-size: 1.1rem;
+  animation: sparkle 0.9s ease-out forwards;
+}
+
+@keyframes sparkle {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  to {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 0px))) scale(1.2) rotate(90deg);
+  }
+}
+
+/* ---- 生産者を買えた ---- */
+button.producer.bought {
+  animation: bought 0.35s ease-out;
+}
+
+@keyframes bought {
+  40% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+}
+
+/* ---- うれしい知らせ（実績・チャレンジのクリア） ---- */
+.toast-special {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.toast-special::before {
+  content: '✦ ';
+}
+
+/* ---- おやすみ・冬眠の場面転換 ---- */
+.transition-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: radial-gradient(circle at 50% 40%, #2e2852, #0b0a18 70%);
+  color: #ece8ff;
+  pointer-events: none;
+  animation: veil var(--transition-ms, 1.8s) ease-in-out forwards;
+}
+
+.transition-icon {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.transition-text {
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+}
+
+@keyframes veil {
+  from {
+    opacity: 0;
+  }
+  30%,
+  65% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* ---- 演出 OFF（設定）：動きをすべて止める。OS の「視差効果を減らす」は style.css 側 ---- */
+:root[data-effects='off'] *,
+:root[data-effects='off'] *::before,
+:root[data-effects='off'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
+:root[data-effects='off'] :is(.floater, .sparkle, .digit-up, .transition-veil) {
+  display: none;
+}
+
+/* ---- スマホ ---- */
+button,
+.tab,
+.producer,
+.upgrade {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 連打で文字が選択されたり、長押しでメニューが出たりしないように */
+.yawn-button,
+.star,
+.sheep-count {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+@media (max-width: 720px) {
+  /* 通知が下部タブに隠れないように */
+  .toasts {
+    bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+  /* 押しやすさ：ボタンの高さを指の大きさに */
+  .button,
+  .amount-button,
+  .auto-toggle {
+    min-height: 40px;
+  }
+  .topbar {
+    padding-top: calc(10px + env(safe-area-inset-top));
+  }
+}

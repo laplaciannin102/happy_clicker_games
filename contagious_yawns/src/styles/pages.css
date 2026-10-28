@@ -1,0 +1,321 @@
+/* タブと、実績・統計ページ。色は styles/theme.css のトークンを使う。 */
+
+/* ---- タブ ---- */
+.tabbar {
+  display: flex;
+  gap: 4px;
+  max-width: 1360px;
+  margin: 0 auto 12px;
+  padding: 0 16px;
+}
+
+.tab {
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  cursor: pointer;
+}
+
+.tab[aria-current='page'] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.narrow-only {
+  display: none;
+}
+
+/* ---- どのタブを開いているか（.layout[data-view]） ---- */
+.page-panel {
+  display: none;
+  grid-column: 2 / -1;
+}
+
+.layout[data-view='dream'] .dream-page,
+.layout[data-view='sheep'] .sheep-page,
+.layout[data-view='hibernate'] .hibernation-page,
+.layout[data-view='challenges'] .challenges-page,
+.layout[data-view='achievements'] .achievements-page,
+.layout[data-view='stats'] .stats-page,
+.layout[data-view='help'] .help-page,
+.layout[data-view='about'] .about-page {
+  display: block;
+}
+
+.layout:is([data-view='dream'], [data-view='hibernate'], [data-view='challenges'], [data-view='sheep'], [data-view='achievements'], [data-view='stats'], [data-view='help'], [data-view='about']) :is(.producer-panel, .upgrade-panel) {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .page-panel {
+    grid-row: 1 / span 2;
+  }
+}
+
+/* スマホ：タブは画面の下に固定。生産者と工房も別のタブにする */
+@media (max-width: 720px) {
+  .wide-only {
+    display: none;
+  }
+  .narrow-only {
+    display: inline;
+  }
+  .tab.narrow-only {
+    display: block;
+  }
+  .tab.narrow-only[hidden] {
+    display: none;
+  }
+
+  .tabbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    margin: 0;
+    padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+  .tab {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 2px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* 下部タブのぶんの余白は、いちばん下のクレジット（.site-footer）でとる */
+  body:has(.tabbar:not([hidden])) .layout {
+    padding-bottom: 0;
+  }
+
+  .page-panel {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .layout[data-view='producers'] .upgrade-panel,
+  .layout[data-view='upgrades'] .producer-panel {
+    display: none;
+  }
+  .layout[data-view='upgrades'] .upgrade-list {
+    max-height: none;
+    overflow: visible;
+  }
+  .layout:is([data-view='dream'], [data-view='hibernate'], [data-view='challenges'], [data-view='sheep'], [data-view='achievements'], [data-view='stats'], [data-view='help'], [data-view='about']) .click-panel {
+    display: none;
+  }
+}
+
+/* ---- ページ共通 ---- */
+.page-panel h2 {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+}
+
+.page-summary {
+  margin: 0 0 12px;
+  color: var(--muted);
+}
+
+/* ---- 実績 ---- */
+.achievement-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 8px;
+}
+
+.achievement {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  color: var(--muted);
+}
+
+.achievement.is-unlocked {
+  border-style: solid;
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--fg);
+}
+
+.achievement-icon {
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.achievement-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.achievement-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.achievement-desc {
+  font-size: 0.75rem;
+}
+
+/* ---- 統計 ---- */
+.stats-page h3 {
+  margin: 16px 0 6px;
+  font-size: 0.95rem;
+}
+
+.stats-list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 16px;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.stats-list dt {
+  color: var(--muted);
+}
+
+.stats-list dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.stats-page.is-tainted .stats-list dd:last-child {
+  color: var(--warn);
+}
+
+/* ---- 遊び方 ---- */
+.help-section h3 {
+  margin: 18px 0 6px;
+  font-size: 1rem;
+}
+
+.help-lines {
+  margin: 0;
+  padding-left: 1.2em;
+  line-height: 1.7;
+}
+
+.help-locked {
+  margin: 18px 0 0;
+  padding: 8px 12px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* ---- 共有ボタン（ねどこの顔の下） ---- */
+.share-box {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}
+
+.share-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.share-button {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+}
+
+.share-hint {
+  margin: 6px 0 0;
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ---- 制作者のページ・ページ下のクレジット ---- */
+.about-face {
+  display: block;
+  width: 96px;
+  height: 96px;
+  margin: 8px auto;
+  font-size: 96px;
+  line-height: 1;
+  text-align: center;
+}
+
+.about-links a {
+  margin-right: 12px;
+  color: var(--accent);
+}
+
+.about-message {
+  margin: 12px 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+}
+
+.about-back {
+  margin-top: 16px;
+}
+
+.about-copy {
+  margin: 12px 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.site-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 12px 16px 20px;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.footer-sep {
+  opacity: 0.6;
+}
+
+.footer-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  /* 固定の下部タブに隠れないように */
+  body:has(.tabbar:not([hidden])) .site-footer {
+    padding-bottom: 88px;
+  }
+  /* 顔の欄は画面の上に貼りつくので、スマホでは説明を省いて背を低くする */
+  .share-box {
+    margin-top: 6px;
+    padding-top: 6px;
+  }
+  .share-hint {
+    display: none;
+  }
+}

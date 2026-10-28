@@ -1,0 +1,152 @@
+/* 生産者のリスト。色は styles/theme.css のトークンを使う。 */
+
+/* ---- 生産者 ---- */
+.panel-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.panel-header h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.amount-group {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.amount-button {
+  padding: 4px 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.amount-button[aria-pressed='true'] {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.producer-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.producer {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+  text-align: left;
+}
+
+button.producer {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+button.producer.is-affordable {
+  opacity: 1;
+  border-color: var(--ok);
+  background: var(--ok-soft);
+}
+
+button.producer.is-affordable:hover {
+  transform: translateY(-1px);
+}
+
+.producer.teaser {
+  border-style: dashed;
+  color: var(--muted);
+}
+
+.producer-icon {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.producer-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.producer-name {
+  font-weight: 700;
+}
+
+.producer-desc,
+.producer-rate {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.producer-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.producer-owned {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.producer-infected {
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.producer-price {
+  font-size: 0.85rem;
+}
+
+.producer-count {
+  margin-right: 4px;
+  color: var(--muted);
+}
+
+.producer-cost {
+  font-weight: 700;
+}
+
+.producer-eta {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.is-affordable .producer-eta {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+@media (max-width: 420px) {
+  .producer {
+    grid-template-columns: 36px 1fr auto;
+    gap: 8px;
+  }
+  .producer-desc {
+    display: none;
+  }
+}

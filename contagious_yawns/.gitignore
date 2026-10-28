@@ -1,0 +1,7 @@
+node_modules/
+dist/
+coverage/
+*.log
+
+# ChatGPT などで作った元の画像（大きいので入れない。縮めたものは src/assets/images に入れる）
+art/raw/

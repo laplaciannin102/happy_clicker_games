@@ -1,0 +1,10 @@
+# 依存・ビルド成果物（各ゲームのフォルダにも個別の .gitignore あり）
+node_modules/
+dist/
+_site/
+
+# AIエージェントの作業用ファイル（公開しない）
+CLAUDE.md
+AGENTS.md
+.claude/
+.codex/

@@ -1,0 +1,89 @@
+/* まくら工房（アップグレード）。色は styles/theme.css のトークンを使う。 */
+.upgrade-panel h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.upgrade-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+
+@media (max-width: 1100px) and (min-width: 721px) {
+  .upgrade-list {
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+}
+
+/* スマホ：生産者リストを押し出さないよう高さを抑える（Phase 3b で下部タブに置き換える予定） */
+@media (max-width: 720px) {
+  .upgrade-list {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    max-height: 220px;
+    overflow-y: auto;
+  }
+  .upgrade-desc {
+    display: none;
+  }
+}
+
+.upgrade {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  text-align: left;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.upgrade.is-affordable {
+  opacity: 1;
+  border-color: var(--ok);
+  background: var(--ok-soft);
+}
+
+.upgrade.is-teaser {
+  border-style: dashed;
+  cursor: default;
+}
+
+.upgrade-icon {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.upgrade-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.upgrade-name {
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.upgrade-desc,
+.upgrade-cost {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.is-affordable .upgrade-cost {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+.upgrade-empty {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}

@@ -1,0 +1,196 @@
+/* ひつじ牧場と、羊を数える画面。色は styles/theme.css のトークンを使う。 */
+.sheep-rules {
+  margin: 0 0 12px;
+  padding-left: 1.2em;
+  font-size: 0.85rem;
+}
+
+.sheep-pillows {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.sheep-next,
+.sheep-cost,
+.sheep-best {
+  margin: 2px 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.sheep-start {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.sheep-start[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.sheep-reason {
+  margin: 4px 0;
+  font-size: 0.8rem;
+  color: var(--warn);
+}
+
+.sheep-result {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+}
+
+.sheep-result h3 {
+  margin: 0 0 4px;
+  font-size: 0.95rem;
+}
+
+.sheep-result p {
+  margin: 2px 0;
+}
+
+.sheep-collection {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 8px;
+}
+
+.sheep-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.sheep-card.is-found {
+  border-style: solid;
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--fg);
+  font-weight: 700;
+}
+
+.sheep-card-icon {
+  font-size: 1.6rem;
+}
+
+/* ---- 遊ぶ画面 ---- */
+.sheep-dialog {
+  width: min(720px, calc(100% - 16px));
+}
+
+.sheep-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.sheep-lane {
+  position: relative;
+  height: 140px;
+  margin: 12px 0;
+  border-radius: 12px;
+  background: linear-gradient(180deg, var(--bg-deep) 0 70%, var(--ok-soft) 70% 100%);
+  overflow: hidden;
+}
+
+.sheep-fence {
+  position: absolute;
+  bottom: 18px;
+  transform: translateX(-50%);
+  font-size: 36px;
+}
+
+.sheep {
+  position: absolute;
+  bottom: 22px;
+  display: inline-flex;
+  align-items: flex-start;
+  font-size: 40px;
+  line-height: 1;
+  will-change: left, transform;
+}
+
+/* 羊の絵文字は左向きなので、右へ歩くように反転する。引き返す羊は反転しない */
+.sheep-body {
+  display: inline-block;
+  transform: scaleX(-1);
+}
+
+.sheep.is-back .sheep-body {
+  transform: none;
+}
+
+.sheep-slow {
+  font-size: 46px;
+}
+
+.sheep-black .sheep-body {
+  filter: brightness(0.25) contrast(1.2);
+}
+
+.sheep-badge {
+  font-size: 18px;
+  margin-left: -6px;
+}
+
+.sheep-rare-gold .sheep-body {
+  filter: sepia(1) saturate(4) hue-rotate(-10deg) drop-shadow(0 0 6px gold);
+}
+
+.sheep-rare-cloud .sheep-body {
+  filter: brightness(1.3) drop-shadow(0 0 6px white);
+}
+
+.sheep-rare-star .sheep-body,
+.sheep-rare-moon .sheep-body {
+  filter: drop-shadow(0 0 8px rgb(255 230 120));
+}
+
+.sheep-rare-pajama .sheep-body {
+  filter: hue-rotate(200deg) saturate(2);
+}
+
+.sheep-feedback {
+  position: absolute;
+  top: 8px;
+  left: 60%;
+  transform: translateX(-50%);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ok);
+}
+
+.sheep-feedback.is-miss {
+  color: var(--warn);
+}
+
+.sheep-feedback.pop {
+  animation: pop 0.25s ease-out;
+}
+
+.sheep-count {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.3rem;
+  touch-action: manipulation;
+}
+
+.sheep-hint {
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+}

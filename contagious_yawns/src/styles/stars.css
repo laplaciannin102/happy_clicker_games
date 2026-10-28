@@ -1,0 +1,75 @@
+/* 流れ星と、効いているブーストの表示。色は styles/theme.css のトークンを使う。 */
+.star-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255 236 150 / 85%), rgb(255 236 150 / 0%) 70%);
+  font-size: 40px;
+  line-height: 64px;
+  cursor: pointer;
+  pointer-events: auto;
+  animation:
+    star-drift 12s linear forwards,
+    star-twinkle 0.9s ease-in-out infinite alternate;
+}
+
+.star:focus-visible {
+  outline-offset: 4px;
+}
+
+@keyframes star-drift {
+  from {
+    transform: translate(0, 0) rotate(-8deg);
+  }
+  to {
+    transform: translate(-60px, 40px) rotate(8deg);
+  }
+}
+
+@keyframes star-twinkle {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(1.35) drop-shadow(0 0 8px rgb(255 220 120 / 90%));
+  }
+}
+
+/* 動きを減らす設定・演出 OFF では、流れずにその場で光るだけにする */
+@media (prefers-reduced-motion: reduce) {
+  .star {
+    animation: none;
+    filter: drop-shadow(0 0 6px rgb(255 220 120 / 90%));
+  }
+}
+
+:root[data-effects='off'] .star {
+  animation: none;
+  filter: drop-shadow(0 0 6px rgb(255 220 120 / 90%));
+}
+
+.buffs {
+  margin: 0 0 4px;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.click-panel.is-boosted .yawn-button {
+  box-shadow:
+    var(--shadow),
+    0 0 0 4px var(--accent-soft),
+    0 0 18px rgb(255 220 120 / 60%);
+}

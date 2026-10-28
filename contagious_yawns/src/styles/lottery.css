@@ -1,0 +1,207 @@
+/* 夢くじ・夢の続き・めざめ（Phase 8）。色は styles/theme.css のトークンを使う。 */
+
+/* ---- 夢くじ（ひつじ牧場のタブの中） ---- */
+.lottery-page {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line);
+}
+
+.lottery-tickets {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.lottery-locked,
+.lottery-stats,
+.lottery-hint {
+  margin: 4px 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.lottery-reason {
+  margin: 4px 0;
+  font-size: 0.8rem;
+  color: var(--warn);
+}
+
+.lottery-draw,
+.lottery-settle {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.lottery-page [aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.lottery-reels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 96px));
+  justify-content: center;
+  gap: 10px;
+  margin: 12px 0 4px;
+}
+
+.lottery-reel {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 10px 4px 6px;
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg-deep);
+  color: var(--fg);
+  cursor: pointer;
+}
+
+.lottery-reel.is-held {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.lottery-symbol {
+  font-size: 2.6rem;
+  line-height: 1.1;
+}
+
+.lottery-hold {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.lottery-reel.is-held .lottery-hold {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* 出目が変わったら、くるっと回して見せる（残したリールは動かさない） */
+.lottery-page.is-spun .lottery-reel:not(.is-held) .lottery-symbol {
+  animation: lottery-spin 0.45s ease-out;
+}
+
+@keyframes lottery-spin {
+  from {
+    transform: translateY(-40%) scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.lottery-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.lottery-respin {
+  margin-top: 8px;
+  padding: 10px;
+}
+
+.lottery-table {
+  margin: 0;
+  padding-left: 1.2em;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 720px) {
+  .lottery-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- 夢の続き（夢の交差点のとなり） ---- */
+.dream-center {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dream-encore {
+  border-style: dashed;
+}
+
+/* ---- めざめ（冬眠のページ） ---- */
+.ending-section {
+  margin-top: 20px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+}
+
+.ending-section h3 {
+  margin-top: 0;
+}
+
+.ending-requirements {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+.ending-requirements .is-met {
+  color: var(--ok);
+}
+
+.ending-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.ending-button[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.ending-done {
+  margin: 6px 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.ending-dialog {
+  max-width: min(520px, calc(100vw - 32px));
+}
+
+.ending-story {
+  text-align: center;
+}
+
+.ending-art {
+  display: block;
+  width: min(240px, 60vw);
+  margin: 0 auto 8px;
+}
+
+.ending-sun {
+  margin: 0;
+  font-size: 3rem;
+}
+
+/* 物語を1行ずつ浮かび上がらせる（演出 OFF なら最初から全部見える） */
+.ending-dialog.is-animated .ending-line {
+  opacity: 0;
+  animation: ending-line 1.2s ease-out forwards;
+  animation-delay: calc(var(--i) * 1.6s + 0.4s);
+}
+
+@keyframes ending-line {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
